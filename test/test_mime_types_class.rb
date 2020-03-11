@@ -100,6 +100,11 @@ describe MIME::Types, 'registry' do
       plain_text.add_extensions('xtxt')
       assert_includes MIME::Types.type_for('xtxt'), 'text/plain'
     end
+
+    it 'is returns stable order for types with equal priority' do
+      assert_equal %w(audio/webm video/webm),
+                   MIME::Types.type_for('foo.webm')
+    end
   end
 
   describe '.count' do
