@@ -150,8 +150,8 @@ class MIME::Types
   #     => [application/xml, image/gif, text/xml]
   def type_for(filename)
     Array(filename).flat_map { |fn|
-      @extension_index[fn.chomp.downcase[/\.?([^.]*?)$/, 1]]
-    }.compact.inject(Set.new, :+).sort { |a, b|
+      @extension_index[fn.chomp.downcase[/\.?([^.]*?)$/, 1]].to_a
+    }.compact.uniq.sort { |a, b|
       a.priority_compare(b)
     }
   end
